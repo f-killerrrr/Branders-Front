@@ -12,6 +12,7 @@ import { TanStackRouterDevtools } from '@tanstack/react-router-devtools';
 import GlobalStyle from './globalStyle';
 import { ThemeProvider } from 'styled-components';
 import { theme } from './styles/theme';
+import LandingPage from './pages/landing';
 
 const rootRoute = createRootRoute({
   component: () => (
@@ -28,6 +29,7 @@ const rootRoute = createRootRoute({
 const indexRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: '/',
+  component: () => <LandingPage />,
 });
 
 const routeTree = rootRoute.addChildren([
