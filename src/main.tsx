@@ -14,6 +14,7 @@ import { ThemeProvider } from 'styled-components';
 import { theme } from './styles/theme';
 import LoginPage from './pages/login';
 import RegisterPage from './pages/register';
+import LandingPage from './pages/landing';
 
 const rootRoute = createRootRoute({
   component: () => (
@@ -30,18 +31,19 @@ const rootRoute = createRootRoute({
 const indexRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: '/',
+  component: () => <LandingPage />,
 });
 
 const loginRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: '/login',
-  component: LoginPage,
+  component: () => <LoginPage />,
 });
 
 const registerRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: '/register',
-  component: RegisterPage,
+  component: () => <RegisterPage />,
 });
 
 const routeTree = rootRoute.addChildren([
