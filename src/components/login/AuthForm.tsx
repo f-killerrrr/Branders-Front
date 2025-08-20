@@ -82,10 +82,6 @@ const DividerDot = styled.span`
   margin: 0 8px;
 `;
 
-const Kakao = styled.img`
-  width: 320px;
-`;
-
 type Props = {
   onSubmit?: (id: string, pw: string) => void;
   className?: string;
@@ -121,10 +117,6 @@ export default function AuthForm({ onSubmit, className }: Props) {
         <DividerDot>｜</DividerDot>
         <HelperLink href="/register">회원가입</HelperLink>
       </HelperRow>
-
-      <a href="#">
-        <Kakao src="/src/assets/kakao_login_medium_wide.png" alt="카카오로 로그인" />
-      </a>
     </Wrap>
   );
 }
