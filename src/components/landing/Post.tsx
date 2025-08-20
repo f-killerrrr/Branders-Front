@@ -101,11 +101,7 @@ function Post({
             <Title postType={postType}>{title}</Title>
             <Description postType={postType}>{description}</Description>
           </HeadlineGroup>
-          {postType === 'content' && (
-            <Button onClick={onButtonClick} overrideStyles={{ fontWeight: 'semibold' }}>
-              {buttonTitle}
-            </Button>
-          )}
+          {postType === 'content' && <Button onClick={onButtonClick}>{buttonTitle}</Button>}
         </Intro>
         <ImageArea>
           <Image src={image} alt={title} postType={postType} />
