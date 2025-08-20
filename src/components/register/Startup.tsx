@@ -1,6 +1,12 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Primary } from './Email';
+
+declare global {
+  interface Window {
+    daum?: any;
+  }
+}
 
 export default function Startup({
   age,
@@ -24,9 +30,53 @@ export default function Startup({
   onSubmit: () => void;
 }) {
   const [submitted, setSubmitted] = useState(false);
+  const [postcodeReady, setPostcodeReady] = useState(false);
+
+  useEffect(() => {
+    if (window.daum?.Postcode) {
+      setPostcodeReady(true);
+      return;
+    }
+    const id = 'daum-postcode-script';
+    if (document.getElementById(id)) return;
+
+    const s = document.createElement('script');
+    s.id = id;
+    s.src = 'https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js';
+    s.async = true;
+    s.onload = () => setPostcodeReady(true);
+    document.body.appendChild(s);
+  }, []);
 
   const ageError = (!age || +age < 1) && submitted;
   const selectedError = selected === 'startup' && submitted;
+
+  const openPostcode = () => {
+    if (!postcodeReady || !window.daum?.Postcode) {
+      alert('주소 검색 스크립트를 불러오는 중입니다. 잠시 후 다시 시도해주세요.');
+      return;
+    }
+
+    const width = 500;
+    const height = 600;
+    const left = window.screenX + (window.outerWidth - width) / 1.5;
+    const top = window.screenY + (window.outerHeight - height) / 1.5;
+
+    new window.daum.Postcode({
+      oncomplete: (data: any) => {
+        // 도로명 우선, 없으면 지번
+        const addr = data.roadAddress || data.jibunAddress || '';
+        // 참고항목 있으면 붙이기 (선택)
+        const extra = data.buildingName ? ` ${data.buildingName}` : '';
+        onChangePosition((addr + extra).trim());
+      },
+      width,
+      height,
+    }).open({
+      left,
+      top,
+    });
+  };
 
   return (
     <Form
@@ -57,7 +107,9 @@ export default function Startup({
         onChange={(e) => onChangeSelected(e.target.value)}
         $error={selectedError}
       >
-        <option value="startup">창업 여부</option>
+        <option value="startup" disabled>
+          창업 여부
+        </option>
         <option value="Startup">창업자</option>
         <option value="Pre_startup">예비 창업자</option>
       </Select>
@@ -69,11 +121,18 @@ export default function Startup({
         onChange={(e) => onChangeType(e.target.value)}
       />
 
-      <Input
-        placeholder="창업 예상 위치"
-        value={position}
-        onChange={(e) => onChangePosition(e.target.value)}
-      />
+      <AddressWrap>
+        <Input
+          placeholder="창업 예상 위치 (클릭하여 주소 검색)"
+          value={position}
+          readOnly
+          onClick={openPostcode}
+          title="클릭하여 주소 검색"
+        />
+        <FindBtn type="button" onClick={openPostcode}>
+          주소 검색
+        </FindBtn>
+      </AddressWrap>
 
       <Primary type="submit">완료하기</Primary>
     </Form>
@@ -85,6 +144,28 @@ const Form = styled.form`
   gap: 10px;
   width: 360px;
   margin: 0 auto 8px;
+`;
+
+const AddressWrap = styled.div`
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 8px;
+`;
+
+const FindBtn = styled.button`
+  height: 44px;
+  padding: 0 12px;
+  border-radius: 10px;
+  border: 1px solid #2563eb;
+  background: #2563eb;
+  color: #fff;
+  font-weight: 700;
+  cursor: pointer;
+  &:hover {
+    background: #1d4ed8;
+    border-color: #1d4ed8;
+  }
 `;
 
 const Select = styled.select<{ $error?: boolean }>`
