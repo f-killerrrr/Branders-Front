@@ -12,6 +12,8 @@ import { TanStackRouterDevtools } from '@tanstack/react-router-devtools';
 import GlobalStyle from './globalStyle';
 import { ThemeProvider } from 'styled-components';
 import { theme } from './styles/theme';
+import LoginPage from './pages/login';
+import RegisterPage from './pages/register';
 import LandingPage from './pages/landing';
 
 const rootRoute = createRootRoute({
@@ -32,8 +34,22 @@ const indexRoute = createRoute({
   component: () => <LandingPage />,
 });
 
+const loginRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/login',
+  component: () => <LoginPage />,
+});
+
+const registerRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/register',
+  component: () => <RegisterPage />,
+});
+
 const routeTree = rootRoute.addChildren([
   indexRoute,
+  loginRoute,
+  registerRoute,
   // TODO: 자식 경로 여기에 추가
 ]);
 
