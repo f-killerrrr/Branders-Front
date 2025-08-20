@@ -4,7 +4,7 @@ import { Link } from '@tanstack/react-router';
 export default function LogoHeader() {
   return (
     <Wrap>
-      <Link to="/register">
+      <Link to="/">
         <Logo src="/src/assets/Logo.svg" />
       </Link>
     </Wrap>

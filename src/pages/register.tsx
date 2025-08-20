@@ -7,9 +7,9 @@ import Email from '../components/register/Email';
 import Verify from '../components/register/Verify';
 import Account from '../components/register/Account';
 import Startup from '../components/register/Startup';
-import Nickname from '../components/register/Nickname';
 
-export type StepKey = 'email' | 'verify' | 'account' | 'startup' | 'nickname';
+// StepKey에서 nickname 제거
+export type StepKey = 'email' | 'verify' | 'account' | 'startup';
 
 const Page = styled.div`
   min-height: 100vh;
@@ -68,8 +68,8 @@ export default function RegisterPage() {
   const [confirmPassword, setConfirm] = useState('');
   const [age, setAge] = useState('');
   const [selected, setSelected] = useState('startup');
+  const [type, setType] = useState(''); // 개인/기업 선택
   const [position, setPosition] = useState('');
-  const [nickname, setNickname] = useState('');
 
   const [leaving, setLeaving] = useState(false);
   const goNext = (next: StepKey) => {
@@ -82,18 +82,16 @@ export default function RegisterPage() {
 
   const titleMap: Record<StepKey, string> = {
     email: '반가워요!',
-    verify: '반가워요!',
-    account: '만나서 반가워요!',
-    startup: '저희 더 알아볼까요?',
-    nickname: '거의 다 됐어요!',
+    verify: '만나서 반가워요!',
+    account: '저희 더 알아볼까요?',
+    startup: '거의 다 했어요!',
   };
 
   const descMap: Record<StepKey, string> = {
     email: '이메일을 입력해주세요.<br/>이메일은 로그인과 비밀번호 찾을 때 사용될 예정입니다.',
     verify: '이메일로 인증번호를 보냈어요.<br/>인증번호를 입력해주세요.',
     account: '아이디와 비밀번호를 입력해주세요.',
-    startup: '창업 유형을 선택해주세요.',
-    nickname: '닉네임을 입력해주세요.',
+    startup: '창업 여부를 선택해주세요.',
   };
 
   return (
@@ -109,7 +107,6 @@ export default function RegisterPage() {
               onChangeEmail={setEmail}
               onSubmit={() => {
                 if (!email.trim()) return;
-                // TODO: 이메일 중복 확인 & 인증코드 요청
                 goNext('verify');
               }}
             />
@@ -120,12 +117,9 @@ export default function RegisterPage() {
               email={email}
               code={authCode}
               onChangeCode={setAuthCode}
-              onResend={() => {
-                // TODO: 인증코드 재전송
-              }}
+              onResend={() => {}}
               onSubmit={() => {
                 if (authCode.length < 6) return;
-                // TODO: 코드 검증
                 goNext('account');
               }}
             />
@@ -150,24 +144,16 @@ export default function RegisterPage() {
             <Startup
               age={age}
               selected={selected}
+              type={type}
               position={position}
               onChangeAge={setAge}
               onChangeSelected={setSelected}
+              onChangeType={setType}
               onChangePosition={setPosition}
               onSubmit={() => {
-                if (!age) return;
-                goNext('nickname');
-              }}
-            />
-          )}
-
-          {step === 'nickname' && (
-            <Nickname
-              nickname={nickname}
-              onChangeNickname={setNickname}
-              onSubmit={() => {
-                if (!nickname.trim()) return;
+                if (!age && selected) return;
                 // TODO: 최종 가입 API
+                alert('회원가입이 완료되었습니다!\n이제 로그인 후 서비스를 이용하실 수 있습니다.');
                 window.location.href = '/login';
               }}
             />
