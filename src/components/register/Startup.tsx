@@ -25,21 +25,18 @@ export default function Startup({
 }) {
   const [submitted, setSubmitted] = useState(false);
 
-  // 에러 조건
   const ageError = (!age || +age < 1) && submitted;
   const selectedError = selected === 'startup' && submitted;
-  const typeError = type === 'startup' && submitted;
 
   return (
     <Form
       onSubmit={(e) => {
         e.preventDefault();
         setSubmitted(true);
-        if (ageError || selectedError || typeError) return;
+        if (ageError || selectedError) return;
         onSubmit();
       }}
     >
-      {/* 나이 */}
       <Input
         type="number"
         placeholder="나이"
@@ -55,7 +52,6 @@ export default function Startup({
       />
       {ageError && <ErrorMsg>나이를 입력해주세요.</ErrorMsg>}
 
-      {/* 창업 여부 */}
       <Select
         value={selected}
         onChange={(e) => onChangeSelected(e.target.value)}
@@ -67,15 +63,12 @@ export default function Startup({
       </Select>
       {selectedError && <ErrorMsg>창업 여부를 선택해주세요.</ErrorMsg>}
 
-      {/* 창업 유형 */}
-      <Select value={type} onChange={(e) => onChangeType(e.target.value)} $error={typeError}>
-        <option value="startup">창업 유형</option>
-        <option value="food">음식점</option>
-        <option value="coffee">카페</option>
-      </Select>
-      {typeError && <ErrorMsg>창업 유형을 선택해주세요.</ErrorMsg>}
+      <Input
+        placeholder="창업 아이템"
+        value={type}
+        onChange={(e) => onChangeType(e.target.value)}
+      />
 
-      {/* 위치 */}
       <Input
         placeholder="창업 예상 위치"
         value={position}
