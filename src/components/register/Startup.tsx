@@ -56,26 +56,20 @@ export default function Startup({
       alert('주소 검색 스크립트를 불러오는 중입니다. 잠시 후 다시 시도해주세요.');
       return;
     }
-
     const width = 500;
     const height = 600;
-    const left = window.screenX + (window.outerWidth - width) / 1.5;
-    const top = window.screenY + (window.outerHeight - height) / 1.5;
+    const left = window.screenX + (window.outerWidth - width) / 2;
+    const top = window.screenY + (window.outerHeight - height) / 2;
 
     new window.daum.Postcode({
       oncomplete: (data: any) => {
-        // 도로명 우선, 없으면 지번
         const addr = data.roadAddress || data.jibunAddress || '';
-        // 참고항목 있으면 붙이기 (선택)
         const extra = data.buildingName ? ` ${data.buildingName}` : '';
         onChangePosition((addr + extra).trim());
       },
       width,
       height,
-    }).open({
-      left,
-      top,
-    });
+    }).open({ left, top });
   };
 
   return (
@@ -122,13 +116,7 @@ export default function Startup({
       />
 
       <AddressWrap>
-        <Input
-          placeholder="창업 예상 위치 (클릭하여 주소 검색)"
-          value={position}
-          readOnly
-          onClick={openPostcode}
-          title="클릭하여 주소 검색"
-        />
+        <Input placeholder="창업 예상 위치" value={position} readOnly onClick={openPostcode} />
         <FindBtn type="button" onClick={openPostcode}>
           주소 검색
         </FindBtn>
@@ -147,7 +135,6 @@ const Form = styled.form`
 `;
 
 const AddressWrap = styled.div`
-  position: relative;
   display: grid;
   grid-template-columns: 1fr auto;
   gap: 8px;
@@ -173,11 +160,6 @@ const Select = styled.select<{ $error?: boolean }>`
   border: 1px solid ${(p) => (p.$error ? '#ef4444' : '#d1d5db')};
   border-radius: 10px;
   padding: 0 12px;
-  outline: none;
-  &:focus {
-    border-color: ${(p) => (p.$error ? '#ef4444' : '#2563eb')};
-    box-shadow: 0 0 0 3px ${(p) => (p.$error ? 'rgba(239,68,68,0.2)' : 'rgba(37,99,235,0.15)')};
-  }
 `;
 
 const Input = styled.input<{ $error?: boolean }>`
@@ -185,10 +167,6 @@ const Input = styled.input<{ $error?: boolean }>`
   border: 1px solid ${(p) => (p.$error ? '#ef4444' : '#d1d5db')};
   border-radius: 10px;
   padding: 0 14px;
-  &:focus {
-    border-color: ${(p) => (p.$error ? '#ef4444' : '#2563eb')};
-    box-shadow: 0 0 0 3px ${(p) => (p.$error ? 'rgba(239,68,68,0.2)' : 'rgba(37,99,235,0.15)')};
-  }
 `;
 
 const ErrorMsg = styled.div`

@@ -8,7 +8,6 @@ import Verify from '../components/register/Verify';
 import Account from '../components/register/Account';
 import Startup from '../components/register/Startup';
 
-// StepKey에서 nickname 제거
 export type StepKey = 'email' | 'verify' | 'account' | 'startup';
 
 const Page = styled.div`
@@ -151,8 +150,9 @@ export default function RegisterPage() {
               onChangeType={setType}
               onChangePosition={setPosition}
               onSubmit={() => {
-                if (!age && selected) return;
-                // TODO: 최종 가입 API
+                if (!age || selected === 'startup') {
+                  return;
+                }
                 alert('회원가입이 완료되었습니다!\n이제 로그인 후 서비스를 이용하실 수 있습니다.');
                 window.location.href = '/login';
               }}
