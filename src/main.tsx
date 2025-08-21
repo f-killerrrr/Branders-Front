@@ -15,6 +15,7 @@ import { theme } from './styles/theme';
 import LoginPage from './pages/login';
 import RegisterPage from './pages/register';
 import LandingPage from './pages/landing';
+import AnalyzePage from './pages/analyze';
 
 const rootRoute = createRootRoute({
   component: () => (
@@ -46,10 +47,17 @@ const registerRoute = createRoute({
   component: () => <RegisterPage />,
 });
 
+const analyzeRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/analyze',
+  component: () => <AnalyzePage />,
+});
+
 const routeTree = rootRoute.addChildren([
   indexRoute,
   loginRoute,
   registerRoute,
+  analyzeRoute,
   // TODO: 자식 경로 여기에 추가
 ]);
 

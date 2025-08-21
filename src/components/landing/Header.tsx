@@ -49,7 +49,7 @@ function Header() {
         <div>
           {/* TODO: 로고 추가 */}
           <Navigation>
-            <NavigationItem to="/">아이템 1</NavigationItem>
+            <NavigationItem to="/analyze">아이템 1</NavigationItem>
             <NavigationItem to="/">아이템 2</NavigationItem>
             <NavigationItem to="/">아이템 3</NavigationItem>
           </Navigation>
