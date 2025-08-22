@@ -4,11 +4,10 @@ import { type TabKey } from './Tabs';
 type Props = {
   open: boolean;
   onToggle: () => void;
-  tab: TabKey;
-  chips?: string[];
+  tab: Exclude<TabKey, 'none'>;
 };
 
-export default function ReportPanel({ open, onToggle, tab, chips = [] }: Props) {
+export default function ReportPanel({ open, onToggle, tab }: Props) {
   return (
     <>
       <Panel $open={open}>
@@ -21,14 +20,6 @@ export default function ReportPanel({ open, onToggle, tab, chips = [] }: Props) 
         {tab === 'deep' && <DeepBlock />}
         {tab === 'flow' && <FlowBlock />}
         {tab === 'popular' && <PopularBlock />}
-
-        {chips.length > 0 && (
-          <ChipWrap>
-            {chips.map((c, i) => (
-              <Chip key={i}>{c}</Chip>
-            ))}
-          </ChipWrap>
-        )}
       </Panel>
 
       {!open && (
@@ -40,7 +31,7 @@ export default function ReportPanel({ open, onToggle, tab, chips = [] }: Props) 
   );
 }
 
-const labelByTab: Record<TabKey, string> = {
+const labelByTab: Record<Exclude<TabKey, 'none'>, string> = {
   simple: '간단분석 리포트',
   deep: '심층분석 리포트',
   flow: '유동인구 리포트',
@@ -149,7 +140,6 @@ function PopularBlock() {
   );
 }
 
-/* styled */
 const Panel = styled.section<{ $open: boolean }>`
   position: absolute;
   top: 16px;
@@ -257,20 +247,6 @@ const ExportBtn = styled.button`
     border-color: #1d4ed8;
   }
 `;
-const ChipWrap = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  margin-top: 10px;
-`;
-const Chip = styled.span`
-  padding: 4px 8px;
-  border-radius: 999px;
-  background: #f3f4f6;
-  font-size: 12px;
-  color: #374151;
-`;
-
 const OpenHandle = styled.button`
   position: absolute;
   top: 16px;

@@ -1,28 +1,66 @@
 import styled from 'styled-components';
+import { ReactNode, useEffect, useLayoutEffect, useRef, useState } from 'react';
 
-export type TabKey = 'simple' | 'deep' | 'flow' | 'popular';
+export type TabKey = 'none' | 'simple' | 'deep' | 'flow' | 'popular';
 
-const TABS: { key: TabKey; label: string; icon: string }[] = [
+export const TABS: { key: Exclude<TabKey, 'none'>; label: string; icon: string }[] = [
   { key: 'simple', label: '간단 분석', icon: '📊' },
   { key: 'deep', label: '심층 분석', icon: '🔍' },
   { key: 'flow', label: '유동 인구', icon: '👥' },
   { key: 'popular', label: '인기 업종', icon: '📈' },
 ];
 
+function Collapsible({ open, children }: { open: boolean; children: ReactNode }) {
+  const innerRef = useRef<HTMLDivElement>(null);
+  const [h, setH] = useState(0);
+
+  const measure = () => {
+    const el = innerRef.current;
+    if (!el) return;
+    setH(open ? el.scrollHeight : 0);
+  };
+
+  useLayoutEffect(measure, [open]);
+  useEffect(() => {
+    if (!open) return;
+    const ro = new ResizeObserver(measure);
+    if (innerRef.current) ro.observe(innerRef.current);
+    const onResize = () => measure();
+    window.addEventListener('resize', onResize);
+    return () => {
+      ro.disconnect();
+      window.removeEventListener('resize', onResize);
+    };
+  }, [open]);
+
+  return (
+    <CollapseOuter style={{ height: h }}>
+      <div ref={innerRef}>{children}</div>
+    </CollapseOuter>
+  );
+}
+
 export default function Tabs({
   value,
   onChange,
+  renderPanel,
 }: {
   value: TabKey;
-  onChange: (v: TabKey) => void;
+  onChange: (v: Exclude<TabKey, 'none'>) => void;
+  renderPanel?: (active: Exclude<TabKey, 'none'>) => ReactNode;
 }) {
   return (
     <Wrap>
       {TABS.map((t) => (
-        <Btn key={t.key} $active={value === t.key} onClick={() => onChange(t.key)}>
-          <i>{t.icon}</i>
-          {t.label}
-        </Btn>
+        <div key={t.key}>
+          <Btn $active={value === t.key} onClick={() => onChange(t.key)}>
+            <i>{t.icon}</i>
+            {t.label}
+          </Btn>
+          <Collapsible open={value === t.key}>
+            {value === t.key && renderPanel ? <PanelSlot>{renderPanel(t.key)}</PanelSlot> : null}
+          </Collapsible>
+        </div>
       ))}
     </Wrap>
   );
@@ -53,4 +91,16 @@ const Btn = styled.button<{ $active?: boolean }>`
     width: 20px;
     text-align: center;
   }
+`;
+const CollapseOuter = styled.div`
+  height: 0;
+  overflow: hidden;
+  transition: height 0.28s ease;
+`;
+const PanelSlot = styled.div`
+  border-radius: 10px;
+  border: 1px solid #e5e7eb;
+  background: #fff;
+  margin-top: 8px;
+  padding: 12px;
 `;
