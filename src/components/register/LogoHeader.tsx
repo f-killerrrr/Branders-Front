@@ -1,11 +1,13 @@
 import { Link } from '@tanstack/react-router';
 import styled from 'styled-components';
 
+import logo from '@/assets/Logo.svg';
+
 export default function LogoHeader() {
   return (
     <Wrap>
       <Link to="/">
-        <Logo src="/src/assets/Logo.svg" />
+        <Logo src={logo} />
       </Link>
     </Wrap>
   );

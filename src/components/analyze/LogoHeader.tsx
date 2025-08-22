@@ -1,11 +1,11 @@
 import styled from 'styled-components';
 
-export default function LogoHeader({ src }: { src: string }) {
-  src = '/src/assets/B_Logo.svg';
+import logo from '@/assets/B_Logo.svg';
 
+export default function LogoHeader() {
   return (
     <Wrap>
-      <img src={src} alt="logo" />
+      <img src={logo} alt="logo" />
       <h1>상권 분석</h1>
     </Wrap>
   );

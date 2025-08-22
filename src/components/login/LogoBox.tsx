@@ -1,6 +1,8 @@
 import { Link } from '@tanstack/react-router';
 import styled from 'styled-components';
 
+import logo from '@/assets/Logo.svg';
+
 const Wrap = styled.div`
   display: flex;
   flex-direction: column;
@@ -37,7 +39,7 @@ export default function LogoBox({ className }: Props) {
     <Wrap className={className}>
       <LogoFrame>
         <Link to="/">
-          <Logo src="/src/assets/Logo.svg" alt="" />
+          <Logo src={logo} alt="" />
         </Link>
       </LogoFrame>
       <Slogan>창업의 시작, 브랜드스와 함께</Slogan>
