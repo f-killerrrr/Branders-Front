@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import Side from '../components/analyze/side';
-import AnalyzeMap from '../components/analyze/map';
-import ReportPanel from '../components/analyze/ReportPanel';
-import type { TabKey } from '../components/analyze/Tabs';
-import { type Category } from '../components/analyze/CategoryGrid';
+
+import { type Category } from '@/components/analyze/CategoryGrid';
+import AnalyzeMap from '@/components/analyze/map';
+import ReportPanel from '@/components/analyze/ReportPanel';
+import Side from '@/components/analyze/side';
+import type { TabKey } from '@/components/analyze/Tabs';
 
 declare global {
   interface Window {

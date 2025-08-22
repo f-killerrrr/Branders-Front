@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { Input, Primary } from './Email';
+
+import { Input, Primary } from '@/components/register/Email';
 
 export default function Verify({
   email,

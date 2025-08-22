@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import styled, { keyframes } from 'styled-components';
 
-import LogoHeader from '../components/register/LogoHeader';
-import TitleBlock from '../components/register/TitleBlock';
-import Email from '../components/register/Email';
-import Verify from '../components/register/Verify';
-import Account from '../components/register/Account';
-import Startup from '../components/register/Startup';
+import Account from '@/components/register/Account';
+import Email from '@/components/register/Email';
+import LogoHeader from '@/components/register/LogoHeader';
+import Startup from '@/components/register/Startup';
+import TitleBlock from '@/components/register/TitleBlock';
+import Verify from '@/components/register/Verify';
 
 export type StepKey = 'email' | 'verify' | 'account' | 'startup';
 

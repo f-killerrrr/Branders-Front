@@ -1,5 +1,5 @@
+import { type ReactNode, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
-import { ReactNode, useEffect, useLayoutEffect, useRef, useState } from 'react';
 
 export type TabKey = 'none' | 'simple' | 'deep' | 'flow' | 'popular';
 

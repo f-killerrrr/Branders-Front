@@ -1,7 +1,8 @@
-import styled from 'styled-components';
 import { useMemo, useState } from 'react';
-import Tabs, { type TabKey } from './Tabs';
-import CategoryGrid, { type Category } from './CategoryGrid';
+import styled from 'styled-components';
+
+import CategoryGrid, { type Category } from '@/components/analyze/CategoryGrid';
+import Tabs, { type TabKey } from '@/components/analyze/Tabs';
 
 type Props = {
   myLocation?: string;

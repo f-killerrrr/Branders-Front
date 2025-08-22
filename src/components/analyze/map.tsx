@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
-import { useKakaoMaps } from '../../hooks/useKakaoMaps';
+
+import { useKakaoMaps } from '@/hooks/useKakaoMaps';
 
 type Props = { center: { lat: number; lng: number } };
 

@@ -1,11 +1,12 @@
-import Header from '@/components/landing/Header';
-import Post from '@/components/landing/Post';
 import styled, { useTheme } from 'styled-components';
 
-import landing_title from '@/assets/landing_title.png';
+import landing_analysis from '@/assets/landing_analysis.png';
 import landing_chatbot from '@/assets/landing_chatbot.png';
 import landing_suggestion from '@/assets/landing_suggestion.png';
-import landing_analysis from '@/assets/landing_analysis.png';
+import landing_title from '@/assets/landing_title.png';
+import Header from '@/components/landing/Header';
+import Post from '@/components/landing/Post';
+
 
 const Page = styled.div`
   width: 100vw;

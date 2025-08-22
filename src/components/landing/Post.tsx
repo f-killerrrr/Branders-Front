@@ -1,6 +1,8 @@
-import { TextStyle } from '@/utils/styled';
 import styled from 'styled-components';
-import Button from '../common/Button';
+
+import Button from '@/components/common/Button';
+import { TextStyle } from '@/utils/styled';
+
 
 type PostType = 'title' | 'content';
 type ContentDirection = 'normal' | 'reverse';

@@ -1,6 +1,7 @@
 import styled from 'styled-components';
-import LogoBox from '../components/login/LogoBox';
-import AuthForm from '../components/login/AuthForm';
+
+import AuthForm from '@/components/login/AuthForm';
+import LogoBox from '@/components/login/LogoBox';
 
 const Page = styled.div`
   min-height: 100vh;

@@ -1,5 +1,3 @@
-import { StrictMode } from 'react';
-import ReactDOM from 'react-dom/client';
 import {
   Outlet,
   RouterProvider,
@@ -8,14 +6,16 @@ import {
   createRouter,
 } from '@tanstack/react-router';
 import { TanStackRouterDevtools } from '@tanstack/react-router-devtools';
-
-import GlobalStyle from './globalStyle';
+import { StrictMode } from 'react';
+import ReactDOM from 'react-dom/client';
 import { ThemeProvider } from 'styled-components';
-import { theme } from './styles/theme';
-import LoginPage from './pages/login';
-import RegisterPage from './pages/register';
-import LandingPage from './pages/landing';
-import AnalyzePage from './pages/analyze';
+
+import GlobalStyle from '@/globalStyle';
+import AnalyzePage from '@/pages/analyze';
+import LandingPage from '@/pages/landing';
+import LoginPage from '@/pages/login';
+import RegisterPage from '@/pages/register';
+import { theme } from '@/styles/theme';
 
 const rootRoute = createRootRoute({
   component: () => (

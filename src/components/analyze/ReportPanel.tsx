@@ -1,5 +1,6 @@
 import styled from 'styled-components';
-import { type TabKey } from './Tabs';
+
+import { type TabKey } from '@/components/analyze/Tabs';
 
 type Props = {
   open: boolean;

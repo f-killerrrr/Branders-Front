@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import styled from 'styled-components';
-import { Primary } from './Email';
+
+import { Primary } from '@/components/register/Email';
 
 export default function Account({
   userid,
