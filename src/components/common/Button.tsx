@@ -1,6 +1,7 @@
-import { TextStyle } from '@/utils/styled';
 import type React from 'react';
 import styled, { css } from 'styled-components';
+
+import { TextStyle } from '@/utils/styled';
 
 type ButtonVariant = 'primary' | 'secondary';
 type ButtonSize = 'small' | 'medium' | 'large';
