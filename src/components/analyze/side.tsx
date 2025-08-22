@@ -1,8 +1,10 @@
 import { useMemo, useState } from 'react';
 import styled from 'styled-components';
 
+import logo from '@/assets/B_Logo.svg';
 import CategoryGrid, { type Category } from '@/components/analyze/CategoryGrid';
 import Tabs, { type TabKey } from '@/components/analyze/Tabs';
+
 
 type Props = {
   myLocation?: string;
@@ -51,7 +53,7 @@ export default function Side({
   return (
     <Wrap>
       <Brand>
-        <img src="/src/assets/B_Logo.svg" alt="logo" width={32} />
+        <img src={logo} alt="logo" width={32} />
         <Title>분석</Title>
       </Brand>
 
