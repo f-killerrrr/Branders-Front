@@ -36,7 +36,7 @@ export default function LogoBox({ className }: Props) {
   return (
     <Wrap className={className}>
       <LogoFrame>
-        <Link to="/login">
+        <Link to="/">
           <Logo src="/src/assets/Logo.svg" alt="" />
         </Link>
       </LogoFrame>
