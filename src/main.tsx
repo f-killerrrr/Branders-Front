@@ -19,13 +19,11 @@ import { theme } from '@/styles/theme';
 
 const rootRoute = createRootRoute({
   component: () => (
-    <>
-      <ThemeProvider theme={theme}>
-        <GlobalStyle />
-        <Outlet />
-        <TanStackRouterDevtools />
-      </ThemeProvider>
-    </>
+    <ThemeProvider theme={theme}>
+      <GlobalStyle />
+      <Outlet />
+      {import.meta.env.DEV && <TanStackRouterDevtools />}
+    </ThemeProvider>
   ),
 });
 
@@ -79,9 +77,14 @@ declare module '@tanstack/react-router' {
 const rootElement = document.getElementById('app');
 if (rootElement && !rootElement.innerHTML) {
   const root = ReactDOM.createRoot(rootElement);
-  root.render(
-    <StrictMode>
-      <RouterProvider router={router} />
-    </StrictMode>,
-  );
+
+  if (import.meta.env.DEV) {
+    root.render(
+      <StrictMode>
+        <RouterProvider router={router} />
+      </StrictMode>,
+    );
+  } else {
+    root.render(<RouterProvider router={router} />);
+  }
 }
