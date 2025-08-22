@@ -1,6 +1,7 @@
 import { TextStyle } from '@/utils/styled';
-import { Link } from '@tanstack/react-router';
+import { Link, useNavigate } from '@tanstack/react-router';
 import styled from 'styled-components';
+import logo from '@/assets/Logo_white.svg';
 
 const HeaderWrapper = styled.header`
   width: 100%;
@@ -42,24 +43,28 @@ const NavigationItem = styled(Link)`
   }
 `;
 
+const Logo = styled.img`
+  height: 60px;
+  object-fit: cover;
+`;
+
 function Header() {
+  const navigate = useNavigate();
+
   return (
     <HeaderWrapper>
       <Container>
-        <div>
-          {/* TODO: 로고 추가 */}
-          <Navigation>
-            <NavigationItem to="/">아이템 1</NavigationItem>
-            <NavigationItem to="/">아이템 2</NavigationItem>
-            <NavigationItem to="/">아이템 3</NavigationItem>
-          </Navigation>
-        </div>
-        <div>
-          <Navigation>
-            <NavigationItem to="/login">로그인</NavigationItem>
-            <NavigationItem to="/register">회원가입</NavigationItem>
-          </Navigation>
-        </div>
+        <Navigation>
+          <Logo src={logo} alt="Logo" onClick={() => navigate({ to: '/' })} />
+          <NavigationItem to="/chatbot">창업 Ai 챗봇</NavigationItem>
+          <NavigationItem to="/analyze">상권 분석</NavigationItem>
+          <NavigationItem to="/recommend">맞춤 지원 정책 추천</NavigationItem>
+          <NavigationItem to="/community">커뮤니티</NavigationItem>
+        </Navigation>
+        <Navigation>
+          <NavigationItem to="/login">로그인</NavigationItem>
+          <NavigationItem to="/register">회원가입</NavigationItem>
+        </Navigation>
       </Container>
     </HeaderWrapper>
   );
