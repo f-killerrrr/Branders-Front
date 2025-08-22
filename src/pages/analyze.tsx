@@ -13,6 +13,7 @@ declare global {
 
 export default function AnalyzePage() {
   const [center, setCenter] = useState({ lat: 37.56779, lng: 126.98004 });
+  const [myLocation, setMyLocation] = useState('');
   const [address, setAddress] = useState('');
   const [tab, setTab] = useState<TabKey>('simple');
   const [open, setOpen] = useState(true);
@@ -31,17 +32,29 @@ export default function AnalyzePage() {
 
   useEffect(() => {
     if (!navigator.geolocation || !window.kakao?.maps?.services) return;
-    navigator.geolocation.getCurrentPosition((pos) => {
-      const lat = pos.coords.latitude,
-        lng = pos.coords.longitude;
-      setCenter({ lat, lng });
-    });
+    navigator.geolocation.getCurrentPosition(
+      (pos) => {
+        const lat = pos.coords.latitude;
+        const lng = pos.coords.longitude;
+        setCenter({ lat, lng });
+
+        const geocoder = new window.kakao.maps.services.Geocoder();
+        geocoder.coord2Address(lng, lat, (result: any, status: any) => {
+          if (status === window.kakao.maps.services.Status.OK && result?.[0]) {
+            const addr = result[0].address?.address_name || '';
+            setMyLocation(addr);
+          }
+        });
+      },
+      () => {},
+    );
   }, []);
 
   return (
     <Wrap>
       <SidePane>
         <Side
+          myLocation={myLocation}
           addressLabel={address}
           onSearch={handleSearch}
           tab={tab}
