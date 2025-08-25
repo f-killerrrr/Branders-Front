@@ -12,8 +12,6 @@ const LogoFrame = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 3px solid #3b82f6;
-  border-radius: 8px;
   padding: 28px 24px;
   width: 360px;
 `;
