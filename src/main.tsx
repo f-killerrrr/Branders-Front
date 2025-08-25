@@ -66,6 +66,11 @@ const policyRoute = createRoute({
   component: () => <Policy />,
 });
 
+const chatbotRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/chatbot',
+});
+
 const routeTree = rootRoute.addChildren([
   indexRoute,
   loginRoute,
@@ -73,6 +78,7 @@ const routeTree = rootRoute.addChildren([
   analyzeRoute,
   mypageRoute,
   policyRoute,
+  chatbotRoute,
   // TODO: 자식 경로 여기에 추가
 ]);
 
