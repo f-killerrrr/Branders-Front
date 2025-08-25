@@ -15,6 +15,8 @@ import AnalyzePage from '@/pages/analyze';
 import LandingPage from '@/pages/landing';
 import LoginPage from '@/pages/login';
 import RegisterPage from '@/pages/register';
+import MyPage from './pages/mypage';
+import Policy from './pages/policy';
 import { theme } from '@/styles/theme';
 
 const rootRoute = createRootRoute({
@@ -51,11 +53,25 @@ const analyzeRoute = createRoute({
   component: () => <AnalyzePage />,
 });
 
+const mypageRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/me',
+  component: () => <MyPage />,
+});
+
+const policyRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/policy',
+  component: () => <Policy />,
+});
+
 const routeTree = rootRoute.addChildren([
   indexRoute,
   loginRoute,
   registerRoute,
   analyzeRoute,
+  mypageRoute,
+  policyRoute,
   // TODO: 자식 경로 여기에 추가
 ]);
 
