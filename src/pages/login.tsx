@@ -1,7 +1,9 @@
+import axios from 'axios';
 import styled from 'styled-components';
 
 import AuthForm from '@/components/login/AuthForm';
 import LogoBox from '@/components/login/LogoBox';
+import type User from '@/interfaces/User';
 
 const Page = styled.div`
   min-height: 100vh;
@@ -39,9 +41,11 @@ const Divider = styled.div`
 `;
 
 export default function LoginPage() {
-  const handleLogin = (id: string, pw: string) => {
-    // TODO: 실제 로그인 처리
-    console.log('login:', { id, pw });
+  const handleLogin = async (id: string, pw: string) => {
+    const response = await axios.post<User>('/userinfo/login', { loginId: id, password: pw });
+    const data = response.data;
+
+    localStorage.setItem('user', JSON.stringify(data));
   };
 
   return (
