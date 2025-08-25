@@ -38,7 +38,7 @@ export default function LogoBox({ className }: Props) {
           <Logo src="/src/assets/Logo.svg" alt="" />
         </Link>
       </LogoFrame>
-      <Slogan>창업의 시작, 브랜드스와 함께</Slogan>
+      <Slogan>창업의 시작, 브랜더스와 함께</Slogan>
     </Wrap>
   );
 }
