@@ -15,6 +15,7 @@ import AnalyzePage from '@/pages/analyze';
 import LandingPage from '@/pages/landing';
 import LoginPage from '@/pages/login';
 import RegisterPage from '@/pages/register';
+import ChatbotPage from '@/pages/chatbot';
 import { theme } from '@/styles/theme';
 
 const rootRoute = createRootRoute({
@@ -51,11 +52,18 @@ const analyzeRoute = createRoute({
   component: () => <AnalyzePage />,
 });
 
+const chatbotRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/chatbot',
+  component: () => <ChatbotPage />,
+});
+
 const routeTree = rootRoute.addChildren([
   indexRoute,
   loginRoute,
   registerRoute,
   analyzeRoute,
+  chatbotRoute,
   // TODO: 자식 경로 여기에 추가
 ]);
 

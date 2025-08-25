@@ -1,3 +1,4 @@
+import { Link, useNavigate } from '@tanstack/react-router';
 import styled from 'styled-components';
 import Button from '@/components/common/Button';
 import { TextStyle } from '@/utils/styled';
@@ -17,7 +18,6 @@ const LeftPage = styled.div`
   height: 1080px;
   flex-direction: column;
   align-items: flex-start;
-  flex-shrink: 0;
   background-color: ${({ theme }) => theme.color.gray[100]};
 `;
 
@@ -45,7 +45,7 @@ const ChatList = styled.div`
 
 const RightPage = styled.div`
   display: flex;
-  width: flex;
+  width: 85%;
   height: 1083px;
   flex-direction: column;
   justify-content: space-between;
@@ -127,6 +127,19 @@ const SendWrap = styled.div`
   align-self: stretch;
 `;
 
+const Inputbox = styled.div`
+  display: flex;
+  width: 1000px;
+  height: 70px;
+  padding: 12px 16px;
+  align-items: center;
+  gap: 10px;
+  border-radius: 25px;
+  border: 1px solid var(--Gray-300, #d1d5db);
+  background: var(--White, #fff);
+  color: ${({ theme }) => theme.color.black};
+`;
+
 const Menu = styled.img``;
 const User = styled.img``;
 const Send = styled.img``;
@@ -154,6 +167,7 @@ function Chatbot() {
           <QButtonWrap></QButtonWrap>
         </ChatPage>
         <Input>
+          <Inputbox>질문을 입력하세요</Inputbox>
           <Send src="/src/assets/send.svg" alt="send" />
         </Input>
       </RightPage>
