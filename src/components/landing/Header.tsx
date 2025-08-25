@@ -59,8 +59,7 @@ function Header() {
           <Logo src={logo} alt="Logo" onClick={() => navigate({ to: '/' })} />
           <NavigationItem to="/chatbot">창업 Ai 챗봇</NavigationItem>
           <NavigationItem to="/analyze">상권 분석</NavigationItem>
-          <NavigationItem to="/recommend">맞춤 지원 정책 추천</NavigationItem>
-          <NavigationItem to="/community">커뮤니티</NavigationItem>
+          <NavigationItem to="/policy">맞춤 지원 정책 추천</NavigationItem>
         </Navigation>
         <Navigation>
           <NavigationItem to="/login">로그인</NavigationItem>

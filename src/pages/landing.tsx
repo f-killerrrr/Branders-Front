@@ -6,7 +6,7 @@ import landing_suggestion from '@/assets/landing_suggestion.png';
 import landing_title from '@/assets/landing_title.png';
 import Header from '@/components/landing/Header';
 import Post from '@/components/landing/Post';
-
+import { useNavigate } from '@tanstack/react-router';
 
 const Page = styled.div`
   width: 100vw;
@@ -18,6 +18,7 @@ const Page = styled.div`
 
 function LandingPage() {
   const theme = useTheme();
+  const navigate = useNavigate();
 
   return (
     <Page>
@@ -38,6 +39,9 @@ function LandingPage() {
         backgroundColor={theme.color.white}
         image={landing_chatbot}
         buttonTitle="AI 에게 상담받기"
+        onButtonClick={() => {
+          navigate({ to: '/chatbot' });
+        }}
         postType="content"
         contentDirection="reverse"
       />
@@ -49,6 +53,9 @@ function LandingPage() {
         backgroundColor={theme.color.primary[100]}
         image={landing_suggestion}
         buttonTitle="맞춤형 정책 추천받기"
+        onButtonClick={() => {
+          navigate({ to: '/policy' });
+        }}
         postType="content"
       />
       <Post
@@ -59,6 +66,9 @@ function LandingPage() {
         backgroundColor={theme.color.white}
         image={landing_analysis}
         buttonTitle="분석 결과 확인하기"
+        onButtonClick={() => {
+          navigate({ to: '/analyze' });
+        }}
         postType="content"
         contentDirection="reverse"
       />
