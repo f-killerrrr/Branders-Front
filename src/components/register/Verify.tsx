@@ -51,9 +51,8 @@ export default function Verify({
     <Form
       onSubmit={(e) => {
         e.preventDefault();
-        if (expired) return;
-        if (code === '123456') onSubmit();
-        else alert('인증번호가 올바르지 않습니다.');
+        if (expired || code.length === 0) return;
+        onSubmit();
       }}
     >
       <Muted title={email}>{email || '이메일 주소'}</Muted>
@@ -64,7 +63,7 @@ export default function Verify({
           maxLength={6}
           placeholder="인증번호"
           value={code}
-          onChange={(e) => onChangeCode(e.target.value.replace(/\D/g, ''))}
+          onChange={(e) => onChangeCode(e.target.value)}
           required
           disabled={expired}
         />
