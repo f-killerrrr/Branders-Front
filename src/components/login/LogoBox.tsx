@@ -14,8 +14,6 @@ const LogoFrame = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 3px solid #3b82f6;
-  border-radius: 8px;
   padding: 28px 24px;
   width: 360px;
 `;
@@ -42,7 +40,7 @@ export default function LogoBox({ className }: Props) {
           <Logo src={logo} alt="" />
         </Link>
       </LogoFrame>
-      <Slogan>창업의 시작, 브랜드스와 함께</Slogan>
+      <Slogan>창업의 시작, 브랜더스와 함께</Slogan>
     </Wrap>
   );
 }

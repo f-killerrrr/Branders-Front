@@ -6,6 +6,7 @@ import {
   createRouter,
 } from '@tanstack/react-router';
 import { TanStackRouterDevtools } from '@tanstack/react-router-devtools';
+import axios from 'axios';
 import { StrictMode } from 'react';
 import ReactDOM from 'react-dom/client';
 import { ThemeProvider } from 'styled-components';
@@ -14,9 +15,9 @@ import GlobalStyle from '@/globalStyle';
 import AnalyzePage from '@/pages/analyze';
 import LandingPage from '@/pages/landing';
 import LoginPage from '@/pages/login';
+import MyPage from '@/pages/mypage';
+import Policy from '@/pages/policy';
 import RegisterPage from '@/pages/register';
-import MyPage from './pages/mypage';
-import Policy from './pages/policy';
 import { theme } from '@/styles/theme';
 
 const rootRoute = createRootRoute({
@@ -89,6 +90,8 @@ declare module '@tanstack/react-router' {
     router: typeof router;
   }
 }
+
+axios.defaults.baseURL = 'http://branders.kro.kr';
 
 const rootElement = document.getElementById('app');
 if (rootElement && !rootElement.innerHTML) {
