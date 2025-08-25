@@ -132,6 +132,7 @@ export default function RegisterPage() {
         }
       }
     })();
+    console.log(errMsg);
     return () => {
       cancelled = true;
     };
