@@ -1,7 +1,8 @@
 import { Link, useNavigate } from '@tanstack/react-router';
 import styled from 'styled-components';
-import { TextStyle } from '@/utils/styled';
+
 import logo from '@/assets/Logo.svg';
+import { TextStyle } from '@/utils/styled';
 
 const HeaderWrapper = styled.header`
   width: 100%;

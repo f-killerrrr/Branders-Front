@@ -1,6 +1,6 @@
 import styled from 'styled-components';
+
 import Header from '@/components/mypage/Header';
-import Button from '@/components/common/Button';
 import { TextStyle } from '@/utils/styled';
 
 const Page = styled.div`

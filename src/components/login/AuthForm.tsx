@@ -1,3 +1,4 @@
+import { useNavigate } from '@tanstack/react-router';
 import { useState } from 'react';
 import styled from 'styled-components';
 
@@ -83,17 +84,20 @@ const DividerDot = styled.span`
 `;
 
 type Props = {
-  onSubmit?: (id: string, pw: string) => void;
+  onSubmit?: (id: string, pw: string) => Promise<void>;
   className?: string;
 };
 
 export default function AuthForm({ onSubmit, className }: Props) {
+  const navigate = useNavigate();
+
   const [id, setId] = useState('');
   const [pw, setPw] = useState('');
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    onSubmit?.(id, pw);
+    await onSubmit?.(id, pw);
+    navigate({ to: '/' });
   };
 
   return (
